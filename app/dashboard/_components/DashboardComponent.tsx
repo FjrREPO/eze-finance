@@ -1,9 +1,10 @@
 "use client";
 
 import React from 'react'
-import CardStaking from './CardStaking';
-import ChartStaking from './ChartStaking';
-import CardPortfolio from './CardPortfolio';
+import CardStaking from '@/components/card/card-staking';
+import ChartStaking from '@/components/chart/chart-staking';
+import CardPortfolio from '@/components/card/card-portfolio';
+import { mockDashboard } from '@/data/mockDashboard';
 
 export default function DashboardComponent() {
   return (
@@ -12,7 +13,11 @@ export default function DashboardComponent() {
         <CardPortfolio />
         <ChartStaking />
       </div>
-      <CardStaking />
+      <div className="flex flex-col gap-4 w-full">
+        {mockDashboard.map((pool, idx) => (
+          <CardStaking key={idx} pool={pool} />
+        ))}
+      </div>
     </div>
   )
 }

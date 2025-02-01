@@ -34,7 +34,7 @@ export const useCurAccount = () => {
       const [name, avatar] = await Promise.all([
         getName({ address: curAddress, chain: base }),
         getAvatar({ 
-          ensName: await getName({ address: curAddress }), 
+          ensName: await getName({ address: curAddress, chain: base }), 
           chain: base 
         })
       ]);

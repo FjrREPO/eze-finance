@@ -1,8 +1,8 @@
 import { normalize } from "./bignumber";
 
 export const calculateMaxBorrowAmount = (
-    priceOracle: number, 
-    ltv: number, 
+    priceOracle: number,
+    ltv: number,
     decimal: number
 ): number => {
     const maxBorrowAmount = normalize(ltv * (priceOracle as number), decimal ?? 0)
@@ -51,15 +51,25 @@ export const calculateUtilizationRate = (
 };
 
 export const truncateAddress = (address: string) => {
-  if (!address) return "No Account";
-  const match = address.match(
-    /^(0x[a-zA-Z0-9]{2})[a-zA-Z0-9]+([a-zA-Z0-9]{2})$/
-  );
-  if (!match) return address;
-  return `${match[1]}…${match[2]}`;
+    if (!address) return "No Account";
+    const match = address.match(
+        /^(0x[a-zA-Z0-9]{2})[a-zA-Z0-9]+([a-zA-Z0-9]{2})$/
+    );
+    if (!match) return address;
+    return `${match[1]}…${match[2]}`;
 };
 
 export const toHex = (num: number) => {
-  const val = Number(num);
-  return "0x" + val.toString(16);
+    const val = Number(num);
+    return "0x" + val.toString(16);
 };
+
+export const formatPercent = (value: number) => `${(value * 100).toFixed(2)}%`;
+
+export const formatUSD = (value: number) =>
+    new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    }).format(value);

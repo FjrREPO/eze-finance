@@ -20,7 +20,7 @@ const wagmiConfig = createConfig({
       appName: 'onchainkit',
     }),
   ],
-  ssr: true,
+  ssr: false,
   transports: {
     [base.id]: http("https://base-mainnet.g.alchemy.com/v2/vwDTCZX0XZnU6flxj8YzYZuMaOKI3EX9"),
     [baseSepolia.id]: http("https://base-sepolia.g.alchemy.com/v2/vwDTCZX0XZnU6flxj8YzYZuMaOKI3EX9"),

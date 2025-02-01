@@ -1,19 +1,21 @@
 import { normalize } from '@/lib/bignumber'
 import { useAccount, useBalance } from 'wagmi'
 
-export const useAccountBalance = ({ token= "", decimal = 18 }: { token: string, decimal: number }) => {
+export const useAccountBalance = ({ token= null, decimal = 18 }: { token: string | null, decimal: number }) => {
   const { address } = useAccount()
 
-  const result = useBalance({
+  const { data: result, isLoading: bLoading, error: bError } = useBalance({
     address: address,
     token: token as HexAddress,
   })
 
-  const bNormal = result?.data?.value
-  const bNormalized = result?.data?.value ? normalize(result.data.value.toString(), decimal) : undefined
+  const bNormal = result?.value
+  const bNormalized = result?.value ? normalize(result.value.toString(), decimal).slice(0, 8) : undefined
 
   return {
     bNormal,
     bNormalized,
+    bLoading,
+    bError
   }
 }
